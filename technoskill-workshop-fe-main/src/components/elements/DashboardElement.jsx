@@ -4,9 +4,16 @@ import homeIcon from "../../assets/home.svg";
 import addEmployeeIcon from "../../assets/addPerson.svg";
 import myInfoIcon from "../../assets/person.svg";
 import loginIcon from "../../assets/login.svg";
+import logoutIcon from "../../assets/logout.svg";
+
+export default function loginHandler(isLoggedIn) {
+  navigate("/login");
+  return !isLoggedIn;
+}
 
 export default function DashboardElement() {
   const navigate = useNavigate();
+  let isLoggedIn = false;
 
   return (
     <div className="bg-[#2B2E63] h-screen w-[390px] flex flex-col py-8">
@@ -28,11 +35,18 @@ export default function DashboardElement() {
         <p className="my-auto text-white ml-5 text-[20px]">Add Employee</p>
       </div>
 
-      <div className="flex ml-5 mt-5" onClick={() => navigate("/login")}>
+      if(isLoggedIn == false) {
+        <div className="flex ml-5 mt-5" onClick={() => navigate("/login")}>
         <img src={loginIcon} />
 
         <p className="my-auto text-white ml-5 text-[20px]">Login</p>
-      </div>
-    </div>
+        </div>
+      } else {
+        <div className="flex ml-5 mt-5" onClick={() => loginHandler(isLoggedIn)}>
+        <img src={logoutIcon} />
+
+        <p className="my-auto text-white ml-5 text-[20px]">Login</p>
+        </div>
+      }
   );
 }

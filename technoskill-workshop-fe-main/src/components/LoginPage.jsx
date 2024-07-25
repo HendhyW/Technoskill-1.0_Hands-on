@@ -9,6 +9,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
+
   const handleLogin = async () => {
     try {
       const response = await axios.get("http://localhost:8000/manager/login", {
