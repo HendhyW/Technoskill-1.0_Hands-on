@@ -7,6 +7,7 @@ export default function LoginPage(){
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
+    const handleLogin = async()
 
     return(
         <div className="bg-[#CED1DA] h-screen w-screen flex">

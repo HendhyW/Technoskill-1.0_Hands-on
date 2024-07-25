@@ -4,4 +4,5 @@ const router = express.Router();
 
 router.get("/login", managerController.login);
 
+
 module.exports = router;
