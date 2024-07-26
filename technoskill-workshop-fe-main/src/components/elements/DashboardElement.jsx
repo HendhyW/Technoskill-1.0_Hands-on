@@ -6,11 +6,6 @@ import myInfoIcon from "../../assets/person.svg";
 import loginIcon from "../../assets/login.svg";
 import logoutIcon from "../../assets/logout.svg";
 
-export default function loginHandler(isLoggedIn) {
-  navigate("/login");
-  return !isLoggedIn;
-}
-
 export default function DashboardElement() {
   const navigate = useNavigate();
   let isLoggedIn = false;
@@ -34,19 +29,18 @@ export default function DashboardElement() {
 
         <p className="my-auto text-white ml-5 text-[20px]">Add Employee</p>
       </div>
+      
+      <div className="flex ml-5 mt-5" onClick={() => navigate("/login")}>
+      <img src={loginIcon} />
 
-      if(isLoggedIn == false) {
-        <div className="flex ml-5 mt-5" onClick={() => navigate("/login")}>
-        <img src={loginIcon} />
+      <p className="my-auto text-white ml-5 text-[20px]">Login</p>
+      </div>
 
-        <p className="my-auto text-white ml-5 text-[20px]">Login</p>
-        </div>
-      } else {
-        <div className="flex ml-5 mt-5" onClick={() => loginHandler(isLoggedIn)}>
-        <img src={logoutIcon} />
+      <div className="flex ml-5 mt-5" onClick={() => isLoggedIn = true}>
+      <img src={logoutIcon} />
 
-        <p className="my-auto text-white ml-5 text-[20px]">Login</p>
-        </div>
-      }
+      <p className="my-auto text-white ml-5 text-[20px]">Logout</p>
+      </div>
+    </div>
   );
 }
