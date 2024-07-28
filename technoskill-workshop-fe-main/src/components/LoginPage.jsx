@@ -8,17 +8,42 @@ export default function LoginPage() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
+  let isLoginDataCorrect = false;
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/manager/login", {
+      const response = await axios.get("http://localhost:8000/manager/", {
         name,
-        password,
+        password
       });
 
-      console.log(response.data);
-      navigate('/home');
+      // Ubah input jadi object
+      let loginInput = {
+          name : name,
+          password : password
+      };
+
+      // Mendapatkan jumlah data yang ada di database "manager"
+      let iterationLength = Object.keys(response.data).length;
+
+      for (let counter = 0; counter < iterationLength; counter++) {
+        // Mengecek input terhadap setiap entry di database "manager"
+        if(response.data[counter]['name'] === loginInput['name']) {
+          if(response.data[counter]['password'] === loginInput['password']) {
+            // Bila ketemu, navigate ke home, bila tidak, lihat kode alert
+            console.log("Password match found!", counter);
+            isLoginDataCorrect = true;
+            navigate('/home');
+            break;
+          }
+        }
+      }
+      
+      if(isLoginDataCorrect == false) {
+        alert("Password atau nama anda salah!");
+      }
+
     } catch (error) {
       console.error(error);
     }

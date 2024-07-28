@@ -8,7 +8,6 @@ import logoutIcon from "../../assets/logout.svg";
 
 export default function DashboardElement() {
   const navigate = useNavigate();
-  let isLoggedIn = false;
 
   return (
     <div className="bg-[#2B2E63] h-screen w-[390px] flex flex-col py-8">
@@ -36,7 +35,7 @@ export default function DashboardElement() {
       <p className="my-auto text-white ml-5 text-[20px]">Login</p>
       </div>
 
-      <div className="flex ml-5 mt-5" onClick={() => isLoggedIn = true}>
+      <div className="flex ml-5 mt-5" onClick={() => isLoggedIn = false}>
       <img src={logoutIcon} />
 
       <p className="my-auto text-white ml-5 text-[20px]">Logout</p>
