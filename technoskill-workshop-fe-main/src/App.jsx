@@ -5,6 +5,7 @@ import AddEmployeePage from "./components/AddEmployeePage";
 import MyInfoPage from "./components/MyInfoPage";
 import LoginPage from "./components/LoginPage";
 import EmployeeDetailsPage from "./components/EmployeeDetailsPage";
+import RegisterPage from "./components/RegisterPage";
 
 function App() {
   
@@ -23,6 +24,8 @@ function App() {
         <Route path="/my-info" element={<MyInfoPage />} />
 
         <Route path="/login" element={<LoginPage />} />
+      
+        <Route path="/register" element={<RegisterPage />} />
 
         <Route path="/employee-details" element={<EmployeeDetailsPage/>} />
       </Routes>
