@@ -9,7 +9,9 @@ import employeeIcon from "../assets/employee.svg";
 export default function EmployeeDetailsPage(){
   
   let employee_details = EmployeeData();
+
   console.log(employee_details);
+
 
   return (
     <div className="bg-[#CED1DA] h-screen w-screen flex">
@@ -45,5 +47,5 @@ export default function EmployeeDetailsPage(){
     </div>
       
     </div>
-  )
+  );
 }
