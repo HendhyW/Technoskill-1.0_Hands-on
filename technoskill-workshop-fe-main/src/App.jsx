@@ -6,6 +6,7 @@ import MyInfoPage from "./components/MyInfoPage";
 import LoginPage from "./components/LoginPage";
 import EmployeeDetailsPage from "./components/EmployeeDetailsPage";
 import RegisterPage from "./components/RegisterPage";
+
 function App() {
   
   return (
