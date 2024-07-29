@@ -4,6 +4,7 @@ import HomePage from "./components/HomePage";
 import AddEmployeePage from "./components/AddEmployeePage";
 import MyInfoPage from "./components/MyInfoPage";
 import LoginPage from "./components/LoginPage";
+import EmployeeDetailsPage from "./components/EmployeeDetailsPage";
 
 function App() {
   
@@ -22,6 +23,8 @@ function App() {
         <Route path="/my-info" element={<MyInfoPage />} />
 
         <Route path="/login" element={<LoginPage />} />
+
+        <Route path="/employee-details" element={<EmployeeDetailsPage/>} />
       </Routes>
     </BrowserRouter>
   );
