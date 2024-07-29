@@ -4,44 +4,44 @@ import axios from "axios";
 
 import DashboardElement from "./elements/DashboardElement";
 
+let isLoginDataCorrect = false;
+let managerName = "";
+
+export function ShowManagerName(inputName) {
+  if(inputName) {managerName = inputName;}
+  return managerName;
+}
+
+export function isLoggedIn(status) {
+  if(status) {isLoginDataCorrect = status;}
+  return isLoginDataCorrect;
+}
+
 export default function LoginPage() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
-  let isLoginDataCorrect = false;
+  isLoginDataCorrect = false;
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/manager/", {
+      const response = await axios.get("http://localhost:8000/manager/login", {
         name,
         password
       });
 
-      // Ubah input jadi object
-      let loginInput = {
-          name : name,
-          password : password
-      };
-
-      // Mendapatkan jumlah data yang ada di database "manager"
-      let iterationLength = Object.keys(response.data).length;
-
-      for (let counter = 0; counter < iterationLength; counter++) {
-        // Mengecek input terhadap setiap entry di database "manager"
-        if(response.data[counter]['name'] === loginInput['name']) {
-          if(response.data[counter]['password'] === loginInput['password']) {
-            // Bila ketemu, navigate ke home, bila tidak, lihat kode alert
-            console.log("Password match found!", counter);
-            isLoginDataCorrect = true;
-            navigate('/home');
-            break;
-          }
-        }
+      if(response.data) {
+        // Bila ketemu, navigate ke home, bila tidak, lihat kode alert
+        console.log("Password match found");
+        isLoginDataCorrect = true;
+        ShowManagerName(name);
+        navigate('/home');
       }
       
       if(isLoginDataCorrect == false) {
         alert("Password atau nama anda salah!");
+        console.log(response.data, name, password);
       }
 
     } catch (error) {
@@ -51,7 +51,6 @@ export default function LoginPage() {
 
   return (
     <div className="bg-[#CED1DA] h-screen w-screen flex">
-      <DashboardElement />
 
       <div className="bg-[#2B2E63] w-[622px] h-[675px] m-auto rounded-2xl flex flex-col text-white">
         <p className="text-[30px] mx-auto mt-20">Login</p>
