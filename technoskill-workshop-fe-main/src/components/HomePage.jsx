@@ -3,6 +3,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+let employee_data;
+
+export function EmployeeData(employee){
+  if(employee){
+    employee_data = employee;
+  }
+  return employee_data;
+}
+
 export default function HomePage() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
@@ -33,7 +42,7 @@ export default function HomePage() {
             <li
               key={index}
               className="text-white text-[20px] p-3 flex flex-col bg-[#737CCF] m-2 rounded-2xl"
-              onClick={() => navigate("/employee-details")}
+              onClick={() => {navigate("/employee-details"); EmployeeData(employee)}}
             >
               <p>{employee.name}</p>
               <p>{employee.division}</p>
