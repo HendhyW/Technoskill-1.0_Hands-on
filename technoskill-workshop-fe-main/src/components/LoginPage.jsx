@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import DashboardElement from "./elements/DashboardElement";
-
 import PopUpElementFailed from "./elements/PopUpElementFailed";
 
 let isLoginDataCorrect = false;
@@ -74,7 +73,6 @@ export default function LoginPage() {
       }
 
       if(isLoginDataCorrect == false) {
-         
         alert("Password atau nama anda salah!");
         console.log(response.data, name, password);
       }

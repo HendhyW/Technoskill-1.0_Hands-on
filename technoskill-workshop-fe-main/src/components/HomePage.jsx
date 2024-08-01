@@ -54,7 +54,7 @@ export default function HomePage() {
           {data.map((employee, index) => (
             <li
               key={index}
-              className="text-white text-[20px] p-3 flex flex-col bg-[#737CCF] m-2 rounded-2xl"
+              className="text-white text-[20px] p-3 flex flex-col bg-[#737CCF] m-2 rounded-2xl hover:bg-[#303655]"
               onClick={() => {navigate("/employee-details"); EmployeeData(employee)}}
             >
               <p>{employee.name}</p>
