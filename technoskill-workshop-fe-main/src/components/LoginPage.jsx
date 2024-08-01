@@ -3,6 +3,23 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import DashboardElement from "./elements/DashboardElement";
+<<<<<<< Updated upstream
+=======
+import PopUpElement from "./elements/PopUpElementFailed";
+
+let isLoginDataCorrect = false;
+let managerName = "";
+
+export function ShowManagerName(inputName) {
+  if(inputName) {managerName = inputName;}
+  return managerName;
+}
+
+export function isLoggedIn(status) {
+  if(status) {isLoginDataCorrect = status;}
+  return isLoginDataCorrect;
+}
+>>>>>>> Stashed changes
 
 export default function LoginPage() {
   const [name, setName] = useState("");
@@ -17,8 +34,52 @@ export default function LoginPage() {
         password,
       });
 
+<<<<<<< Updated upstream
       console.log(response.data);
       navigate('/home');
+=======
+      // Ubah input jadi object
+      let loginInput = {
+        name : name,
+        password : password
+      };
+
+      // Mendapatkan jumlah data yang ada di database "manager"
+      let iterationLength = Object.keys(response.data).length;
+
+      /*
+      Fungsi handleLogin panggil http://localhost:8000/manager/login ga return apapun
+      contoh 1.
+      Input: {name: 'admin', password: '123'} (ada di DB)
+      Output: {}
+
+      contoh 2.
+      Input: {name: '', password: ''} (kosong)
+      Output: {}
+
+      Untuk setiap kasus input, selalu return {}
+      */
+
+      for (let counter = 0; counter < iterationLength; counter++) {
+        // Mengecek input terhadap setiap entry di database "manager"
+        if(response.data[counter]['name'] === loginInput['name']) {
+          if(response.data[counter]['password'] === loginInput['password']) {
+            // Bila ketemu, navigate ke home, bila tidak, lihat kode alert
+            console.log("Password match found!", counter);
+            isLoginDataCorrect = true;
+            ShowManagerName(name);
+            navigate('/home');
+            break;
+          }
+        }
+      }
+
+      if(isLoginDataCorrect == false) {
+        alert("Password atau nama anda salah!");
+        console.log(response.data, name, password);
+      }
+
+>>>>>>> Stashed changes
     } catch (error) {
       console.error(error);
     }

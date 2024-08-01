@@ -1,11 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import DashboardElement from "./elements/DashboardElement";
 
 import employeeIcon from "../assets/employee.svg";
 
+<<<<<<< Updated upstream
 export default function MyInfoPage() {
   const [name, setName] = useState("");
+=======
+import { ShowManagerName } from "./LoginPage";
+import { isLoggedIn } from "./LoginPage";
+
+export default function MyInfoPage() {
+  const name = ShowManagerName();
+  const navigate = useNavigate();
+  let isLoginDataCorrect = isLoggedIn();
+
+  const handleMyInfoPage = async () => {
+    if(isLoginDataCorrect == false) {
+      navigate("login");
+    }
+  }
+
+  useEffect(() => {
+    handleMyInfoPage();
+  }, []);
+
+>>>>>>> Stashed changes
   return (
     <div className="bg-[#CED1DA] h-screen w-screen flex">
       <DashboardElement />

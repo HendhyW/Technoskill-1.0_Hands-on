@@ -1,13 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DashboardElement from "./elements/DashboardElement";
 import axios from 'axios';
+import { isLoggedIn } from "./LoginPage";
 
 export default function AddEmployeePage() {
   const [name, setName] = useState("");
   const [division, setDivision] = useState("");
   const [salary, setSalary] = useState("");
+  const navigate = useNavigate();
+  let isLoginDataCorrect = isLoggedIn();
 
   const handleAddEmployee = async() => {
+    if(isLoginDataCorrect == false) {
+      navigate("login");
+    }
     try {
       const response = await axios.post('http://localhost:8000/employee/add', {
         name,
@@ -21,6 +28,10 @@ export default function AddEmployeePage() {
       console.error(error);
     }
   }
+
+  useEffect(() => {
+    handleAddEmployee();
+  }, []);
 
   return (
     <div className="bg-[#CED1DA] h-screen w-screen flex">
