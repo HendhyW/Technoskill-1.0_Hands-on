@@ -2,9 +2,14 @@ import DashboardElement from "./elements/DashboardElement";
 import PopUpElement from "./elements/PopUpElementFailed"
 import { useEffect, useState } from "react";
 import axios from "axios";
+
+export default function HomePage() {
+  const [data, setData] = useState([]);
+
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import Popup from 'reactjs-popup'
+import { isLoggedIn } from "./LoginPage";
 
 let employee_data;
 
@@ -18,8 +23,13 @@ export function EmployeeData(employee){
 export default function HomePage() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
+  let isLoginDataCorrect = isLoggedIn();
+
 
   const handleHomePage = async () => {
+    if(isLoginDataCorrect == false) {
+      navigate("login");
+    }
     try {
       const response = await axios.get("http://localhost:8000/employee/");
       console.log(response.data);
@@ -36,6 +46,7 @@ export default function HomePage() {
   }, []);
 
   return (
+
     <div className="bg-[#CED1DA] flex">
       <DashboardElement />
       {/* <PopUpElement /> */}
@@ -64,8 +75,8 @@ export default function HomePage() {
             </li>
           ))}
         </ol>
+
       </div>
-    </div>
   );
 }
 

@@ -1,13 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import DashboardElement from "./elements/DashboardElement";
 
 import employeeIcon from "../assets/employee.svg";
 
+
 import { ShowManagerName } from "./LoginPage";
+import { isLoggedIn } from "./LoginPage";
 
 export default function MyInfoPage() {
   const name = ShowManagerName();
+  const navigate = useNavigate();
+  let isLoginDataCorrect = isLoggedIn();
+
+  const handleMyInfoPage = async () => {
+    if(isLoginDataCorrect == false) {
+      navigate("login");
+    }
+  }
+
+  useEffect(() => {
+    handleMyInfoPage();
+  }, []);
+
 
   return (
     <div className="bg-[#CED1DA] h-screen w-screen flex">

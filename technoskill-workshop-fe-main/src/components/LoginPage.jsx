@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import DashboardElement from "./elements/DashboardElement";
+
 import PopUpElementFailed from "./elements/PopUpElementFailed";
+
 let isLoginDataCorrect = false;
 let managerName = "";
 
@@ -34,6 +36,7 @@ export default function LoginPage() {
         password
       });
 
+
       // Ubah input jadi object
       let loginInput = {
         name : name,
@@ -63,6 +66,7 @@ export default function LoginPage() {
             // Bila ketemu, navigate ke home, bila tidak, lihat kode alert
             console.log("Password match found!", counter);
             isLoginDataCorrect = true;
+            ShowManagerName(name);
             navigate('/home');
             break;
           }
@@ -70,10 +74,11 @@ export default function LoginPage() {
       }
 
       if(isLoginDataCorrect == false) {
-        PopUpElementFailed(2);
-        // alert("Password atau nama anda salah!");
+         
+        alert("Password atau nama anda salah!");
         console.log(response.data, name, password);
       }
+
 
     } catch (error) {
       console.error(error);
@@ -117,7 +122,6 @@ export default function LoginPage() {
           </button>
         </div>
       </div>
-      {/* {isLoginDataCorrect ? true : PopUpElement(2) } */}
 
     </div>
     

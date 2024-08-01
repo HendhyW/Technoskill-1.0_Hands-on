@@ -1,16 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DashboardElement from "./elements/DashboardElement";
 import axios from 'axios';
-
 import { EmployeeData } from "./HomePage";
-
 import employeeIcon from "../assets/employee.svg";
+import { isLoggedIn } from "./LoginPage";
+
 
 export default function EmployeeDetailsPage(){
   
   let employee_details = EmployeeData();
+  const navigate = useNavigate();
+  let isLoginDataCorrect = isLoggedIn();
+  console.log(employee_details);
+  
+  const handleEmployeeDetails = async () => {
+    if(isLoginDataCorrect == false) {
+      navigate("login");
+    }
+  }
+
+  useEffect(() => {
+    handleEmployeeDetails();
+  }, []);
+
 
   console.log(employee_details);
+
 
 
   return (
