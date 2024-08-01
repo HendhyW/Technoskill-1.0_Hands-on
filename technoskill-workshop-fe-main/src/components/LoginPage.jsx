@@ -26,19 +26,49 @@ export default function LoginPage() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/manager/login", {
+
+      // Kenapa ga pake http://localhost:8000/manager/login ?
+      // Lihat komen dibawah
+      const response = await axios.get("http://localhost:8000/manager/", {
         name,
         password
       });
 
-      if(response.data) {
-        // Bila ketemu, navigate ke home, bila tidak, lihat kode alert
-        console.log("Password match found");
-        isLoginDataCorrect = true;
-        ShowManagerName(name);
-        navigate('/home');
+      // Ubah input jadi object
+      let loginInput = {
+        name : name,
+        password : password
+      };
+
+      // Mendapatkan jumlah data yang ada di database "manager"
+      let iterationLength = Object.keys(response.data).length;
+
+      /*
+      Fungsi handleLogin panggil http://localhost:8000/manager/login ga return apapun
+      contoh 1.
+      Input: {name: 'admin', password: '123'} (ada di DB)
+      Output: {}
+
+      contoh 2.
+      Input: {name: '', password: ''} (kosong)
+      Output: {}
+
+      Untuk setiap kasus input, selalu return {}
+      */
+
+      for (let counter = 0; counter < iterationLength; counter++) {
+        // Mengecek input terhadap setiap entry di database "manager"
+        if(response.data[counter]['name'] === loginInput['name']) {
+          if(response.data[counter]['password'] === loginInput['password']) {
+            // Bila ketemu, navigate ke home, bila tidak, lihat kode alert
+            console.log("Password match found!", counter);
+            isLoginDataCorrect = true;
+            navigate('/home');
+            break;
+          }
+        }
       }
-      
+
       if(isLoginDataCorrect == false) {
         alert("Password atau nama anda salah!");
         console.log(response.data, name, password);
