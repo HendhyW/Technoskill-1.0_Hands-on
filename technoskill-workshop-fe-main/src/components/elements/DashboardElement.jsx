@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import homeIcon from "../../assets/home.svg";
 import addEmployeeIcon from "../../assets/addPerson.svg";
 import myInfoIcon from "../../assets/person.svg";
-import loginIcon from "../../assets/login.svg";
 import logoutIcon from "../../assets/logout.svg";
 
 import { isLoggedIn } from "../LoginPage";
