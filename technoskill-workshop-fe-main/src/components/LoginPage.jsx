@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import DashboardElement from "./elements/DashboardElement";
-<<<<<<< Updated upstream
-=======
-import PopUpElement from "./elements/PopUpElementFailed";
+
+import PopUpElementFailed from "./elements/PopUpElementFailed";
 
 let isLoginDataCorrect = false;
 let managerName = "";
@@ -19,25 +18,25 @@ export function isLoggedIn(status) {
   if(status) {isLoginDataCorrect = status;}
   return isLoginDataCorrect;
 }
->>>>>>> Stashed changes
 
 export default function LoginPage() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
+  isLoginDataCorrect = false;
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/manager/login", {
+
+      // Kenapa ga pake http://localhost:8000/manager/login ?
+      // Lihat komen dibawah
+      const response = await axios.get("http://localhost:8000/manager/", {
         name,
-        password,
+        password
       });
 
-<<<<<<< Updated upstream
-      console.log(response.data);
-      navigate('/home');
-=======
+
       // Ubah input jadi object
       let loginInput = {
         name : name,
@@ -75,11 +74,12 @@ export default function LoginPage() {
       }
 
       if(isLoginDataCorrect == false) {
+         
         alert("Password atau nama anda salah!");
         console.log(response.data, name, password);
       }
 
->>>>>>> Stashed changes
+
     } catch (error) {
       console.error(error);
     }
@@ -87,7 +87,6 @@ export default function LoginPage() {
 
   return (
     <div className="bg-[#CED1DA] h-screen w-screen flex">
-      <DashboardElement />
 
       <div className="bg-[#2B2E63] w-[622px] h-[675px] m-auto rounded-2xl flex flex-col text-white">
         <p className="text-[30px] mx-auto mt-20">Login</p>
@@ -123,6 +122,8 @@ export default function LoginPage() {
           </button>
         </div>
       </div>
+
     </div>
+    
   );
 }

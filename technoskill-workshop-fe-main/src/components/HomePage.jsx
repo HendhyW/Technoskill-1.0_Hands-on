@@ -1,11 +1,11 @@
 import DashboardElement from "./elements/DashboardElement";
+import PopUpElement from "./elements/PopUpElementFailed"
 import { useEffect, useState } from "react";
 import axios from "axios";
-<<<<<<< Updated upstream
 
 export default function HomePage() {
   const [data, setData] = useState([]);
-=======
+
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import Popup from 'reactjs-popup'
@@ -26,7 +26,6 @@ export default function HomePage() {
   let isLoginDataCorrect = isLoggedIn();
 
 
->>>>>>> Stashed changes
   const handleHomePage = async () => {
     if(isLoginDataCorrect == false) {
       navigate("login");
@@ -47,16 +46,28 @@ export default function HomePage() {
   }, []);
 
   return (
-<<<<<<< Updated upstream
+
     <div className="bg-[#CED1DA] flex">
       <DashboardElement />
+      {/* <PopUpElement /> */}
+      
 
-      <div className="bg-[#798DC5] w-[1400px] h-[841px] m-auto rounded-2xl flex-1">
+      <div className="bg-[#798DC5] w-[1400px] h-[841px] m-auto rounded-2xl flex-1" >
+      
+      
+      {/* <Popup trigger={<button className="m-auto"> Trigger</button>} position="right center">
+        <div className="bg-[#303655] w-[500px] h-[300px] m-auto rounded-2xl">
+          <div>Popup content here !!</div>
+        </div>
+      </Popup>
+         */}
+        
         <ol className="overflow-auto w-full">
           {data.map((employee, index) => (
             <li
               key={index}
               className="text-white text-[20px] p-3 flex flex-col bg-[#737CCF] m-2 rounded-2xl"
+              onClick={() => {navigate("/employee-details"); EmployeeData(employee)}}
             >
               <p>{employee.name}</p>
               <p>{employee.division}</p>
@@ -64,36 +75,7 @@ export default function HomePage() {
             </li>
           ))}
         </ol>
-=======
-      <div className="bg-[#CED1DA] flex">
-        <DashboardElement />
-        
 
-        <div className="bg-[#798DC5] w-[1400px] h-[841px] m-auto rounded-2xl flex-1" >
-        
-        
-        {/* <Popup trigger={<button className="m-auto"> Trigger</button>} position="right center">
-          <div className="bg-[#303655] w-[500px] h-[300px] m-auto rounded-2xl">
-            <div>Popup content here !!</div>
-          </div>
-        </Popup>
-          */}
-          
-          <ol className="overflow-auto w-full">
-            {data.map((employee, index) => (
-              <li
-                key={index}
-                className="text-white text-[20px] p-3 flex flex-col bg-[#737CCF] m-2 rounded-2xl"
-                onClick={() => {navigate("/employee-details"); EmployeeData(employee)}}
-              >
-                <p>{employee.name}</p>
-                <p>{employee.division}</p>
-                <p>{employee.salary}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
->>>>>>> Stashed changes
       </div>
   );
 }

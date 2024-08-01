@@ -5,10 +5,7 @@ import DashboardElement from "./elements/DashboardElement";
 
 import employeeIcon from "../assets/employee.svg";
 
-<<<<<<< Updated upstream
-export default function MyInfoPage() {
-  const [name, setName] = useState("");
-=======
+
 import { ShowManagerName } from "./LoginPage";
 import { isLoggedIn } from "./LoginPage";
 
@@ -27,7 +24,7 @@ export default function MyInfoPage() {
     handleMyInfoPage();
   }, []);
 
->>>>>>> Stashed changes
+
   return (
     <div className="bg-[#CED1DA] h-screen w-screen flex">
       <DashboardElement />
@@ -38,12 +35,10 @@ export default function MyInfoPage() {
         <p className="text-[30px] mx-auto mt-20">My Info</p>
 
         <div className="mx-auto mt-10">
-          <p className="text-[20px]">Name</p>
-          <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="bg-[#BFCBCE] w-[343px] h-[41px] text-gray-700 px-2"
-          />
+          <p className="text-[25px]">Name</p>
+          <div className="mx-auto rounded-2x1 text-white text-[25px]">
+            {name}
+          </div>
         </div>
       </div>
     </div>
