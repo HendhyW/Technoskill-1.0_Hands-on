@@ -24,8 +24,6 @@ export default function LoginPage(){
 
     return(
         <div className="bg-[#CED1DA] h-screen w-screen flex">
-            <DashboardElement/> 
-            
             <div className="bg-[#2B2E63] w-[622px] h-[675px]  m-auto rounded-2xl flex flex-col text-white">
                 <p className="mx-auto text-white mt-20 text-[30px]">Register</p>
                 
