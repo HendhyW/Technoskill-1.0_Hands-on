@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import DashboardElement from "./elements/DashboardElement";
-import PopUpElement from "./elements/PopUpElementFailed";
+import PopUpElementFailed from "./elements/PopUpElementFailed";
 let isLoginDataCorrect = false;
 let managerName = "";
 
@@ -70,7 +70,7 @@ export default function LoginPage() {
       }
 
       if(isLoginDataCorrect == false) {
-        // PopUpElement(2);
+        PopUpElementFailed(2);
         // alert("Password atau nama anda salah!");
         console.log(response.data, name, password);
       }
@@ -117,7 +117,7 @@ export default function LoginPage() {
           </button>
         </div>
       </div>
-      {isLoginDataCorrect ? true : PopUpElement(2) }
+      {/* {isLoginDataCorrect ? true : PopUpElement(2) } */}
 
     </div>
     

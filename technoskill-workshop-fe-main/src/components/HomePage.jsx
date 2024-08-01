@@ -38,7 +38,7 @@ export default function HomePage() {
   return (
     <div className="bg-[#CED1DA] flex">
       <DashboardElement />
-      <PopUpElement />
+      {/* <PopUpElement /> */}
       
 
       <div className="bg-[#798DC5] w-[1400px] h-[841px] m-auto rounded-2xl flex-1" >
