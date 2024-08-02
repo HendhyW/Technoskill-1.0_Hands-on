@@ -8,6 +8,7 @@ exports.addEmployee = async function addEmployee(req, res) {
 
     res.status(201).json(response.rows[0]);
   } catch (error) {
+    console.log(error);
     res.status(500).json(error);
   }
 };

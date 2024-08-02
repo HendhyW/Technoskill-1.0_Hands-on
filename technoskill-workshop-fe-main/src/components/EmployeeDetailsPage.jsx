@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import DashboardElement from "./elements/DashboardElement";
 import axios from 'axios';
 import React from "react";
+import swal from "sweetalert2";
 import { EmployeeData } from "./HomePage";
 import employeeIcon from "../assets/employee.svg";
 import trashcanIcon from "../assets/trashcan.svg";
 import { isLoggedIn } from "./LoginPage";
-
 
 export default function EmployeeDetailsPage(){
   
@@ -35,13 +35,33 @@ export default function EmployeeDetailsPage(){
     }
   }
 
+  const Popup = () => {
+    swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        })
+          handleRemoveEmployee();
+        
+      }
+    });
+  }
+
   useEffect(() => {
     handleEmployeeDetails();
   }, []);
 
   console.log(employee_details);
-
-
 
   return (
     <div className="bg-[#CED1DA] h-screen w-screen flex">
@@ -52,7 +72,7 @@ export default function EmployeeDetailsPage(){
 
         <img src={trashcanIcon}
           className="w-[50px] fixed mt-5 ml-5 hover:outline hover:outline-[#FFFFFF] outline-offset-8 rounded-lg"
-          onClick={handleRemoveEmployee}
+          onClick={Popup}
         />
         <img src={employeeIcon} className="w-[240px] mx-auto mt-24" />
 
