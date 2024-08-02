@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import swal from "sweetalert2"
 
 import DashboardElement from "./elements/DashboardElement";
 import PopUpElementFailed from "./elements/PopUpElementFailed";
@@ -45,6 +46,11 @@ export default function LoginPage() {
       // Mendapatkan jumlah data yang ada di database "manager"
       let iterationLength = Object.keys(response.data).length;
 
+      let inputnamelength = Object.keys(loginInput['name']).length;
+      let inputpasslength = Object.keys(loginInput['password']).length;
+
+      console.log(loginInput['name']);
+
       /*
       Fungsi handleLogin panggil http://localhost:8000/manager/login ga return apapun
       contoh 1.
@@ -66,15 +72,37 @@ export default function LoginPage() {
             console.log("Password match found!", counter);
             isLoginDataCorrect = true;
             ShowManagerName(name);
+            swal.fire({
+              icon: "success",
+              iconColor: "#FFFFFF",
+              text: "Login Succes",
+              color: "#FFFFFF",
+              background: "#303655"
+            });
             navigate('/home');
             break;
           }
         }
       }
 
+      if(!loginInput['name'] || !loginInput['password']) {
+        swal.fire({
+          icon: "error",
+          iconColor: "#FFFFFF",
+          text: "Silahkan masukkan nama dan password terlebih dahulu",
+          color: "#FFFFFF",
+          background: "#303655"
+        });
+      }
+
       if(isLoginDataCorrect == false) {
-        alert("Password atau nama anda salah!");
-        console.log(response.data, name, password);
+        swal.fire({
+          icon: "error",
+          iconColor: "#FFFFFF",
+          text: "Login Failed",
+          color: "#FFFFFF",
+          background: "#303655"
+        });
       }
 
 
