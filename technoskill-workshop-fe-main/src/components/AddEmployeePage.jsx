@@ -13,7 +13,7 @@ export default function AddEmployeePage() {
 
   const handleAddEmployee = async() => {
     if(isLoginDataCorrect == false) {
-      navigate("login");
+      navigate("/login");
     }
     try {
       const response = await axios.post('http://localhost:8000/employee/add', {
@@ -29,9 +29,6 @@ export default function AddEmployeePage() {
     }
   }
 
-  useEffect(() => {
-    handleAddEmployee();
-  }, []);
 
   return (
     <div className="bg-[#CED1DA] h-screen w-screen flex">

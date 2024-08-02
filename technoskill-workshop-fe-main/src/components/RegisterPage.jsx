@@ -1,21 +1,56 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import swal from 'sweetalert2';
 
 // import { useNavigate } from "react-router-dom"
 import DashboardElement from "./elements/DashboardElement";
 
 export default function LoginPage(){
+    const navigate = useNavigate();
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     // const navigate = useNavigate();
     const RegisterHandler = async() => {
         try{
-            const response = await axios.post('http://localhost:8000/manager/register',{
-                name,
-                password
-            });
-            if(response.status !== 201) throw new Error("Register failed");
-            console.log(response.data);
+            if(name.length === 0 || password.length === 0){
+                swal.fire({
+                    icon: "error",
+                    iconColor: "#FFFFFF",
+                    text: "Mohon masukkan nama dan password terlebih dahulu",
+                    color: "#FFFFFF",
+                    background: "#303655"
+                });
+                navigate("/register");
+            }
+            else{
+                const response = await axios.post('http://localhost:8000/manager/register',{
+                    name,
+                    password
+                });
+
+                if(response.status === 201){
+                    swal.fire({
+                        icon: "success",
+                        iconColor: "#FFFFFF",
+                        text: "Registrasi berhasil",
+                        color: "#FFFFFF",
+                        background: "#303655"
+                    });
+                    navigate("/login");
+                }
+                
+                else{
+                    swal.fire({
+                        icon: "error",
+                        iconColor: "#FFFFFF",
+                        text: "Registrasi gagal",
+                        color: "#FFFFFF",
+                        background: "#303655"
+                    });
+                    throw new Error("Register failed")
+                }
+            }
         }catch (error){
             console.error(error);
         }
