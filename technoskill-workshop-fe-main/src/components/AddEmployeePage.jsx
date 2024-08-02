@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DashboardElement from "./elements/DashboardElement";
 import axios from 'axios';
+import swal from "sweetalert2";
 import { isLoggedIn } from "./LoginPage";
 
 export default function AddEmployeePage() {
@@ -16,14 +17,45 @@ export default function AddEmployeePage() {
       navigate("/login");
     }
     try {
-      const response = await axios.post('http://localhost:8000/employee/add', {
-        name,
-        division,
-        salary
+      if(name.length === 0 || division.length === 0 || salary.length === 0){
+        swal.fire({
+          icon: "error",
+          iconColor: "#FFFFFF",
+          text: "Mohon masukkan nama, divisi, dan salary terlebih dahulu",
+          color: "#FFFFFF",
+          background: "#303655"
       });
-      if(response.status !== 201) throw new Error("Add employee failed");
+      }
+      else {
+        const response = await axios.post('http://localhost:8000/employee/add', {
+          name,
+          division,
+          salary
+        });
 
-      console.log(response.data); 
+        if(response.status === 201){
+          swal.fire({
+            icon: "success",
+            iconColor: "#FFFFFF",
+            text: "Berhasil menambahkan data",
+            color: "#FFFFFF",
+            background: "#303655"
+          });
+          navigate("/home");
+        }
+        else{
+          swal.fire({
+            icon: "error",
+            iconColor: "#FFFFFF",
+            text: "Gagal menambahkan data",
+            color: "#FFFFFF",
+            background: "#303655"
+          });
+          throw new Error("Add employee failed")
+        }
+
+        console.log(response.data);
+      }; 
     }catch(error){
       console.error(error);
     }

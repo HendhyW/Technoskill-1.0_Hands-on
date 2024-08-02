@@ -17,7 +17,7 @@ export default function EmployeeDetailsPage(){
   
   const handleEmployeeDetails = async () => {
     if(isLoginDataCorrect == false) {
-      navigate("login");
+      navigate("/login");
     }
   }
 

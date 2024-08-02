@@ -3,9 +3,6 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import swal from 'sweetalert2';
 
-// import { useNavigate } from "react-router-dom"
-import DashboardElement from "./elements/DashboardElement";
-
 export default function LoginPage(){
     const navigate = useNavigate();
     const [name, setName] = useState("");
@@ -39,7 +36,7 @@ export default function LoginPage(){
                     });
                     navigate("/login");
                 }
-                
+
                 else{
                     swal.fire({
                         icon: "error",

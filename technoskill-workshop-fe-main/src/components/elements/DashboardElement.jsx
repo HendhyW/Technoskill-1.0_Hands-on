@@ -6,6 +6,7 @@ import myInfoIcon from "../../assets/person.svg";
 import logoutIcon from "../../assets/logout.svg";
 
 import { isLoggedIn } from "../LoginPage";
+import swal from "sweetalert2";
 
 export default function DashboardElement() {
   const navigate = useNavigate();
@@ -30,7 +31,18 @@ export default function DashboardElement() {
         <p className="my-auto text-white ml-5 text-[20px]">Add Employee</p>
       </div>
 
-      <div className="flex mt-5 ml-10 w-[300px] hover:outline hover:outline-[#FFFFFF] outline-offset-8 rounded-2xl" onClick={() => {navigate("/login"); isLoggedIn(false); console.log(isLoggedIn(false))}}>
+      <div className="flex mt-5 ml-10 w-[300px] hover:outline hover:outline-[#FFFFFF] outline-offset-8 rounded-2xl" onClick={() => 
+      {navigate('/login');
+        swal.fire({
+        icon: "success",
+        iconColor: "#FFFFFF",
+        text: "Anda telah log-out",
+        color: "#FFFFFF",
+        background: "#303655"
+        });
+        isLoggedIn(false); 
+        console.log(isLoggedIn(false))
+        }}>
       <img src={logoutIcon} />
 
       <p className="my-auto text-white ml-5 text-[20px]">Logout</p>

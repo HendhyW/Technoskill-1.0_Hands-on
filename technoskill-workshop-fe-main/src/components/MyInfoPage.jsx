@@ -16,7 +16,7 @@ export default function MyInfoPage() {
 
   const handleMyInfoPage = async () => {
     if(isLoginDataCorrect == false) {
-      navigate("login");
+      navigate("/login");
     }
   }
 

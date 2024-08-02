@@ -25,7 +25,7 @@ export default function HomePage() {
 
   const handleHomePage = async () => {
     if(isLoginDataCorrect == false) {
-      navigate("login");
+      navigate("/login");
     }
     try {
       const response = await axios.get("http://localhost:8000/employee/");
