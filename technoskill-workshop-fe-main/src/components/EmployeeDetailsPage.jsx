@@ -24,9 +24,12 @@ export default function EmployeeDetailsPage(){
   const handleRemoveEmployee = async () => {
     try {
       const name = employee_details['name'];
-      const response = await axios.delete('http://localhost:8000/employee/remove', {
-        name
-      });
+      const response = await axios.delete(
+        'http://localhost:8000/employee/remove', 
+        {data: {name}} 
+      );
+      navigate("/home");
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -35,12 +38,6 @@ export default function EmployeeDetailsPage(){
   useEffect(() => {
     handleEmployeeDetails();
   }, []);
-
-  
-  useEffect(() => {
-    handleRemoveEmployee();
-  }, []);
-
 
   console.log(employee_details);
 
@@ -55,7 +52,7 @@ export default function EmployeeDetailsPage(){
 
         <img src={trashcanIcon}
           className="w-[50px] fixed mt-5 ml-5 hover:outline hover:outline-[#FFFFFF] outline-offset-8 rounded-lg"
-          onClick={() => {handleRemoveEmployee; navigate("/home")}}
+          onClick={handleRemoveEmployee}
         />
         <img src={employeeIcon} className="w-[240px] mx-auto mt-24" />
 
