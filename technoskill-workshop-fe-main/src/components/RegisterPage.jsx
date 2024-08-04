@@ -3,12 +3,24 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import swal from 'sweetalert2';
 
+function CheckNameDuplicate(input, search) {
+    const length = Object.keys(search.data).length;
+
+    for (let counter = 0; counter < length; counter++) {
+        if(search.data[counter]['name'] === input) {
+            return true;
+        }
+    }
+    return false;
+}
+
 export default function LoginPage(){
     const navigate = useNavigate();
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     // const navigate = useNavigate();
     const RegisterHandler = async() => {
+
         try{
             if(name.length === 0 || password.length === 0){
                 swal.fire({
@@ -21,31 +33,41 @@ export default function LoginPage(){
                 navigate("/register");
             }
             else{
-                const response = await axios.post('http://localhost:8000/manager/register',{
-                    name,
-                    password
-                });
+                const search = await axios.get('http://localhost:8000/manager/',
+                    {params: {name: "", password: ""}}
+                );
+                const isNameDuplicate = CheckNameDuplicate(name, search)
+                console.log(isNameDuplicate);
 
-                if(response.status === 201){
-                    swal.fire({
-                        icon: "success",
-                        iconColor: "#FFFFFF",
-                        text: "Registrasi berhasil",
-                        color: "#FFFFFF",
-                        background: "#303655"
+                if(isNameDuplicate == false) {
+                    const response = await axios.post('http://localhost:8000/manager/register',{
+                        name,
+                        password
                     });
-                    navigate("/login");
-                }
 
-                else{
-                    swal.fire({
-                        icon: "error",
-                        iconColor: "#FFFFFF",
-                        text: "Registrasi gagal",
-                        color: "#FFFFFF",
-                        background: "#303655"
-                    });
-                    throw new Error("Register failed")
+                    if(response.status === 201){
+                        swal.fire({
+                            icon: "success",
+                            iconColor: "#FFFFFF",
+                            text: "Registrasi berhasil",
+                            color: "#FFFFFF",
+                            background: "#303655"
+                        });
+                        navigate("/login");
+                    }
+
+                    else{
+                        swal.fire({
+                            icon: "error",
+                            iconColor: "#FFFFFF",
+                            text: "Registrasi gagal",
+                            color: "#FFFFFF",
+                            background: "#303655"
+                        });
+                        throw new Error("Register failed")
+                    }
+                } else {
+                    
                 }
             }
         }catch (error){
