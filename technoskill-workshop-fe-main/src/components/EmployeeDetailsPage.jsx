@@ -17,6 +17,13 @@ export default function EmployeeDetailsPage(){
   
   const handleEmployeeDetails = async () => {
     if(isLoginDataCorrect == false) {
+      swal.fire({
+        icon: "error",
+        iconColor: "#FFFFFF",
+        text: "Harap login terlebih dahulu",
+        color: "#FFFFFF",
+        background: "#303655"
+      });
       navigate("/login");
     }
   }
@@ -37,22 +44,26 @@ export default function EmployeeDetailsPage(){
 
   const Popup = () => {
     swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: "Hapus Data?",
+      text: "Apakah anda ingin menghapus data ini?",
+      color: "#FFFFFF",
+      background: "#303655",
       icon: "warning",
+      iconColor: "#FFFFFF",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
+      confirmButtonText: "Hapus"
     }).then((result) => {
       if (result.isConfirmed) {
         swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success"
+          text: "Data telah terhapus",
+          color: "#FFFFFF",
+          background: "#303655",
+          icon: "success",
+          iconColor: "#FFFFFF"
         })
-          handleRemoveEmployee();
-        
+        handleRemoveEmployee();
       }
     });
   }

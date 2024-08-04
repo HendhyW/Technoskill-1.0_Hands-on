@@ -14,6 +14,13 @@ export default function AddEmployeePage() {
 
   const handleAddEmployee = async() => {
     if(isLoginDataCorrect == false) {
+      swal.fire({
+        icon: "error",
+        iconColor: "#FFFFFF",
+        text: "Harap login terlebih dahulu",
+        color: "#FFFFFF",
+        background: "#303655"
+      });
       navigate("/login");
     }
     try {

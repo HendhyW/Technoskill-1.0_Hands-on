@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import swal from "sweetalert2";
 
 import DashboardElement from "./elements/DashboardElement";
 
@@ -16,6 +17,13 @@ export default function MyInfoPage() {
 
   const handleMyInfoPage = async () => {
     if(isLoginDataCorrect == false) {
+      swal.fire({
+        icon: "error",
+        iconColor: "#FFFFFF",
+        text: "Harap login terlebih dahulu",
+        color: "#FFFFFF",
+        background: "#303655"
+    });
       navigate("/login");
     }
   }
