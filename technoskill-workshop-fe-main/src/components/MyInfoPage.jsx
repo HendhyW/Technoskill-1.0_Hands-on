@@ -17,6 +17,7 @@ export default function MyInfoPage() {
 
   const handleMyInfoPage = async () => {
     if(isLoginDataCorrect == false) {
+      navigate("/login");
       swal.fire({
         icon: "error",
         iconColor: "#FFFFFF",
@@ -24,7 +25,6 @@ export default function MyInfoPage() {
         color: "#FFFFFF",
         background: "#303655"
     });
-      navigate("/login");
     }
   }
 

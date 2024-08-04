@@ -2,7 +2,7 @@ import DashboardElement from "./elements/DashboardElement";
 import PopUpElement from "./elements/PopUpElementFailed"
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import Popup from 'reactjs-popup'
@@ -24,7 +24,9 @@ export default function HomePage() {
 
 
   const handleHomePage = async () => {
+    
     if(isLoginDataCorrect == false) {
+      navigate("/login");
       swal.fire({
         icon: "error",
         iconColor: "#FFFFFF",
@@ -32,7 +34,6 @@ export default function HomePage() {
         color: "#FFFFFF",
         background: "#303655"
       });
-      navigate("/login");
     }
     try {
       const response = await axios.get("http://localhost:8000/employee/");

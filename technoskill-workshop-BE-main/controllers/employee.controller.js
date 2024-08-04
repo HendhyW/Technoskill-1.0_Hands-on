@@ -26,8 +26,9 @@ exports.getEmployee = async function getEmployee(req, res) {
 exports.removeEmployee = async function removeEmployee(req, res) {
   // Insert kode GET di sini
   try {
-    const { name } = req.body;
-    const response = await pg.query('DELETE FROM employee WHERE name = $1', [name]);
+    const { id } = req.body;
+    
+    const response = await pg.query('DELETE FROM employee WHERE id = $1', [id]);
     res.status(200).json(response);
   } catch (error) {
     res.status(500).json(error);

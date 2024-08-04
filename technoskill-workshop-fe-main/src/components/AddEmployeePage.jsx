@@ -12,8 +12,9 @@ export default function AddEmployeePage() {
   const navigate = useNavigate();
   let isLoginDataCorrect = isLoggedIn();
 
-  const handleAddEmployee = async() => {
+  const checkLoggedIn = async() =>{
     if(isLoginDataCorrect == false) {
+      navigate("/login"); 
       swal.fire({
         icon: "error",
         iconColor: "#FFFFFF",
@@ -21,8 +22,11 @@ export default function AddEmployeePage() {
         color: "#FFFFFF",
         background: "#303655"
       });
-      navigate("/login");
     }
+  }
+
+  const handleAddEmployee = async() => {
+    
     try {
       if(name.length === 0 || division.length === 0 || salary.length === 0){
         swal.fire({
@@ -68,6 +72,9 @@ export default function AddEmployeePage() {
     }
   }
 
+  useEffect(() => {
+    checkLoggedIn();
+  }, []);
 
   return (
     <div className="bg-[#CED1DA] h-screen w-screen flex">

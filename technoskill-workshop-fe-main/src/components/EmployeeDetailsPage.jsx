@@ -10,13 +10,10 @@ import trashcanIcon from "../assets/trashcan.svg";
 import { isLoggedIn } from "./LoginPage";
 
 export default function EmployeeDetailsPage(){
-  
-  let employee_details = EmployeeData();
   const navigate = useNavigate();
-  let isLoginDataCorrect = isLoggedIn();
-  
   const handleEmployeeDetails = async () => {
     if(isLoginDataCorrect == false) {
+      navigate("/login");
       swal.fire({
         icon: "error",
         iconColor: "#FFFFFF",
@@ -24,16 +21,24 @@ export default function EmployeeDetailsPage(){
         color: "#FFFFFF",
         background: "#303655"
       });
-      navigate("/login");
     }
   }
 
+  useEffect(() => {
+    handleEmployeeDetails();
+  }, []);
+
+  let employee_details = EmployeeData();
+  let isLoginDataCorrect = isLoggedIn();
+  
+  
+
   const handleRemoveEmployee = async () => {
     try {
-      const name = employee_details['name'];
+      const id = employee_details['id'];
       const response = await axios.delete(
         'http://localhost:8000/employee/remove', 
-        {data: {name}} 
+        {data: {id}} 
       );
       navigate("/home");
       console.log(response);
@@ -68,9 +73,7 @@ export default function EmployeeDetailsPage(){
     });
   }
 
-  useEffect(() => {
-    handleEmployeeDetails();
-  }, []);
+  if(employee_details){
 
   console.log(employee_details);
 
@@ -114,4 +117,5 @@ export default function EmployeeDetailsPage(){
       
     </div>
   );
+}
 }
