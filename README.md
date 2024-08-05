@@ -23,8 +23,9 @@
     4. Buka website dengan link yang didapatkan didalam console
 - Back-end
     1. Buka console untuk file "technoskill-workshop-BE-main"
-    2. Masukkan "npm run start"
-    3. Database sudah bisa digunakan
+    2. Masukkan "npm install"
+    3. Masukkan "npm run start"
+    4. Database sudah bisa digunakan
     - Note: Cek console secara berkala dan restart bagian back-end bila proses back-end berhenti (tidak bisa akses data/halaman tidak menampilkan data apapun)
 ### Fitur
 - Halaman
@@ -45,3 +46,9 @@
     - Pesan pop-up
     - Tidak bisa mengakses halaman apapun bila belum login
     - Tidak dapat melakukan register apabila username telah digunakan
+
+
+## Created By:
+- Anthonius Hendhy Wirawan
+- Maxwell Zefanya Ginting
+- Naufal Hadi Rasikhin
