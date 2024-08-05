@@ -43,8 +43,8 @@ export default function MyInfoPage() {
         <p className="text-[30px] mx-auto mt-20">My Info</p>
 
         <div className="mx-auto mt-10">
-          <p className="text-[25px]">Name</p>
-          <div className="mx-auto rounded-2x1 text-white text-[25px]">
+          <p className=" text-[25px]">Name</p>
+          <div className="bg-[#BFCBCE] w-[249px] py-1 px-2 rounded-xl mx-auto text-black text-[25px] break-all">
             {name}
           </div>
         </div>

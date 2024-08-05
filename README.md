@@ -14,13 +14,6 @@
     - Figma (untuk desain UI UX)
     https://www.figma.com/
 
-## CARA MENJALANKAN FRONT END  
-    masuk ke dalam folder front_end
-    `cd front_end`
-    
-    create package dengan
-    `npm install`
-
 ## DOKUMENTASI
 ### Inisialisasi
 - Front-end:
@@ -51,3 +44,4 @@
     - UI interaktif
     - Pesan pop-up
     - Tidak bisa mengakses halaman apapun bila belum login
+    - Tidak dapat melakukan register apabila username telah digunakan

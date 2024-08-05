@@ -1,5 +1,4 @@
 import DashboardElement from "./elements/DashboardElement";
-import PopUpElement from "./elements/PopUpElementFailed"
 import { useEffect, useState } from "react";
 import axios from "axios";
 import swal from "sweetalert2";
