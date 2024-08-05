@@ -82,7 +82,7 @@ export default function LoginPage() {
         }
       }
 
-      if(!loginInput['name'] || !loginInput['password']) {
+      if(!loginInput['name'] && !loginInput['password']) {
         swal.fire({
           icon: "error",
           iconColor: "#FFFFFF",
@@ -91,17 +91,44 @@ export default function LoginPage() {
           background: "#303655"
         });
       }
-
-      if(isLoginDataCorrect == false) {
+      else if (!loginInput['name']){
         swal.fire({
           icon: "error",
           iconColor: "#FFFFFF",
-          text: "Login Failed",
+          text: "Silahkan masukkan nama terlebih dahulu",
+          color: "#FFFFFF",
+          background: "#303655"
+        });
+      }
+      else if(!loginInput['password']){
+        swal.fire({
+          icon: "error",
+          iconColor: "#FFFFFF",
+          text: "Silahkan masukkan password terlebih dahulu",
           color: "#FFFFFF",
           background: "#303655"
         });
       }
 
+      if(isLoginDataCorrect == false && loginInput['name'] && loginInput['password']) {
+        swal.fire({
+          icon: "error",
+          iconColor: "#FFFFFF",
+          text: "User tidak ditemukan",
+          color: "#FFFFFF",
+          background: "#303655"
+        });
+      }
+
+      if(response.status === 500){
+        swal.fire({
+          icon: "error",
+          iconColor: "#FFFFFF",
+          text: "Sedang terjadi gangguan pada server, silahkan coba lain kali",
+          color: "#FFFFFF",
+          background: "#303655"
+        });
+      }
 
     } catch (error) {
       console.error(error);
