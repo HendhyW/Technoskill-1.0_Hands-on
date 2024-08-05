@@ -22,11 +22,31 @@ export default function LoginPage(){
     const RegisterHandler = async() => {
 
         try{
-            if(name.length === 0 || password.length === 0){
+            if(name.length === 0 && password.length === 0){
                 swal.fire({
                     icon: "error",
                     iconColor: "#FFFFFF",
                     text: "Mohon masukkan nama dan password terlebih dahulu",
+                    color: "#FFFFFF",
+                    background: "#303655"
+                });
+                navigate("/register");
+            }
+            else if(name.length === 0){
+                swal.fire({
+                    icon: "error",
+                    iconColor: "#FFFFFF",
+                    text: "Mohon masukkan nama terlebih dahulu",
+                    color: "#FFFFFF",
+                    background: "#303655"
+                });
+                navigate("/register");
+            }
+            else if(password.length === 0){
+                swal.fire({
+                    icon: "error",
+                    iconColor: "#FFFFFF",
+                    text: "Mohon masukkan password terlebih dahulu",
                     color: "#FFFFFF",
                     background: "#303655"
                 });
@@ -67,7 +87,13 @@ export default function LoginPage(){
                         throw new Error("Register failed")
                     }
                 } else {
-                    
+                    swal.fire({
+                        icon: "error",
+                        iconColor: "#FFFFFF",
+                        text: "Nama telah digunakan",
+                        color: "#FFFFFF",
+                        background: "#303655"
+                    });
                 }
             }
         }catch (error){
